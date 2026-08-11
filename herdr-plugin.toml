@@ -1,0 +1,25 @@
+id = "herdr.agent-webhook-notify"
+name = "Agent Webhook Notify"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Send a webhook request when an agent finishes or gets blocked."
+platforms = ["linux", "macos", "windows"]
+
+[[actions]]
+id = "toggle"
+title = "Toggle webhook notify"
+command = ["node", "toggle.mjs"]
+
+[[actions]]
+id = "enable"
+title = "Enable webhook notify"
+command = ["node", "toggle.mjs", "on"]
+
+[[actions]]
+id = "disable"
+title = "Disable webhook notify"
+command = ["node", "toggle.mjs", "off"]
+
+[[events]]
+on = "pane.agent_status_changed"
+command = ["node", "notify.mjs"]
