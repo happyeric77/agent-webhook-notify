@@ -9,7 +9,7 @@ Requires Node.js 18+. Zero npm dependencies.
 Install from GitHub:
 
 ```
-herdr plugin install <owner>/agent-webhook-notify
+herdr plugin install happyeric77/agent-webhook-notify
 ```
 
 Or link a local checkout while developing:
