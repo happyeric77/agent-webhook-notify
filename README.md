@@ -44,10 +44,28 @@ Confirm the actions are visible:
 herdr plugin action list --plugin herdr.agent-webhook-notify
 ```
 
-Toggle notifications:
+## Usage
+
+Once installed and configured, the plugin runs automatically: whenever an agent
+reaches `done` or `blocked`, Herdr fires `pane.agent_status_changed` and the
+plugin POSTs the event to `WEBHOOK_URL`.
+
+Enable / disable notifications (toggle):
 
 ```
-herdr plugin action invoke toggle --plugin herdr.agent-webhook-notify
+herdr plugin action invoke herdr.agent-webhook-notify.toggle
+```
+
+Check the current state:
+
+```
+cat ~/.local/state/herdr/plugins/herdr.agent-webhook-notify/enabled
+```
+
+View recent plugin runs (stdout/stderr, exit codes):
+
+```
+herdr plugin log list --plugin herdr.agent-webhook-notify
 ```
 
 ## Payload
@@ -73,10 +91,17 @@ Bind the toggle action from `~/.config/herdr/config.toml`:
 
 ```
 [[keys.command]]
-key = "prefix+s"
+key = "prefix+a"
 type = "plugin_action"
 command = "herdr.agent-webhook-notify.toggle"
-description = "toggle webhook notify"
+description = "Toggle webhook notify"
+```
+
+In-app toasts are shown only when toast delivery is enabled:
+
+```
+[ui.toast]
+delivery = "herdr"
 ```
 
 Reload Herdr after changing the config:
